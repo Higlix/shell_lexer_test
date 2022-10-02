@@ -4,6 +4,9 @@ INC_DIR = ./inc
 LIBFT_DIR = ./libft
 
 SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC += $(wildcard $(SRC_DIR)/lexer/*.c)
+SRC += $(wildcard $(SRC_DIR)/token/*.c)
+SRC += $(wildcard $(SRC_DIR)/utils/*.c)
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 CFLAGS = -Wall -I $(INC_DIR)
@@ -17,6 +20,9 @@ all: $(OBJ_DIR) $(LIBFT) $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $@
+	mkdir -p $@/lexer
+	mkdir -p $@/token
+	mkdir -p $@/utils
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -32,7 +38,7 @@ run: all
 	@./$(NAME)
 
 clean:
-	rm -rf obj
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
